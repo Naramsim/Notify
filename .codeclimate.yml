@@ -23,6 +23,11 @@ engines:
     enabled: true
   eslint:
     enabled: true
+    checks:
+      semi:
+        enabled: false
+      no-multi-str:
+        enabled: false
   csslint:
     enabled: true
 
