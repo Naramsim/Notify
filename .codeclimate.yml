@@ -28,6 +28,10 @@ engines:
         enabled: false
       no-multi-str:
         enabled: false
+      no-trailing-spaces:
+        enabled: false
+      no-undef:
+        enabled: false
   csslint:
     enabled: true
 
