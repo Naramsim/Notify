@@ -44,7 +44,7 @@ var cssToast = 	"body { \
 						.NotifyImg { \
 							left: 1.25em; \
 						} \
-					 @media only screen and (-webkit-min-device-pixel-ratio: 1.3), \
+					@media only screen and (-webkit-min-device-pixel-ratio: 1.3), \
 							only screen and (-o-min-device-pixel-ratio: 13/10), \
 							only screen and (min-resolution: 120dpi){ \
 								.NotifyToast{ \
@@ -65,16 +65,17 @@ function Toast (hint, desc, img) {
 	if (img.length > 0){
 		innerToast += "<img class='NotifyImg' src='" + img + "'>"
 	}		
-	innerToast +="	<div class='NotifyToastDesc'>" + desc + "</div> \
+	innerToast += "	<div class='NotifyToastDesc'>" + desc + "</div> \
 					<div class='NotifyToastHint'>" + hint + "</div> \
 					</div>"
-	var toast = createToast()
-	
+
 	function createToast() { //Private
 		var toastElement = document.createElement("div")
 		//toastElement.innerHTML = innerToast
 		return toastElement
 	}
+	var toast = createToast()
+	
 	function styleToast() { //Private
 		setTimeout(function() { toast.classList.add("NotifyToast");
 								toast.innerHTML = innerToast }, 0);
@@ -108,7 +109,8 @@ function startToast(timer, hint, description, img) { //start all the process tha
 	//setTimeout(currentToast.hideToast, timer)
 }
 
-document.addEventListener('DOMContentLoaded', function(){
+document.addEventListener("DOMContentLoaded", function(){
+	"use strict";
 	var css = document.createElement("style");
 	css.type = "text/css";
 	css.innerHTML = cssToast;
@@ -116,9 +118,10 @@ document.addEventListener('DOMContentLoaded', function(){
 });
 
 window.addEventListener("keydown", function(k) {
+	"use strict";
 	switch(k.keyCode) {
 		case 32: //up
-			startToast(2000, "WATH NOW!", "Sei conesso!",  "https://lh5.googleusercontent.com/-zpbBgPjMIbs/AAAAAAAAAAI/AAAAAAAAAAA/hwgFO6TObQE/s32-c/photo.jpg" ) //timer, msg
+			startToast(2000, "WATH NOW!", "Sei conesso!", "https://lh5.googleusercontent.com/-zpbBgPjMIbs/AAAAAAAAAAI/AAAAAAAAAAA/hwgFO6TObQE/s32-c/photo.jpg" ) //timer, msg
 		break;
 	}
 });
