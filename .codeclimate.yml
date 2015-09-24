@@ -51,6 +51,9 @@ engines:
 #   - "**.rb"
 #   - "**.go"
 
+ratings:
+   paths:
+   - "**.js"
 # You can globally exclude files from being analyzed by any engine using the
 # exclude_paths key.
 
