@@ -1,6 +1,8 @@
 var toastHeight = 2.25 + "em";
 var toastHeightMedia = 4.25 + "em";
 var bgColor = "50, 50, 50";
+/*jshint multistr: true */
+/*eslint no-multi-str: 2*/
 var cssToast = 	"body { \
 						margin: 0 0 0 0; \
 					} \
