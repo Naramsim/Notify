@@ -80,7 +80,7 @@ function Toast (hint, desc, img) {
 	
 	function styleToast() { //Private
 		setTimeout(function() { toast.classList.add("NotifyToast");
-								toast.innerHTML = innerToast }, 0);
+								toast.innerHTML = innerToast; }, 0);
 	}
 	function appendToastToBody() { //Private
 		document.body.appendChild(toast);
@@ -88,20 +88,20 @@ function Toast (hint, desc, img) {
 	this.showToast = function() { //Public 
 		setTimeout(function() { toast.classList.add("NotifyShow"); }, 90);
 		toast.style.visibility = "visible";
-	}
+	};
 	this.hideToast = function() { //Public 
 		toast.classList.remove("NotifyShow");
 		toast.classList.add("NotifyHide");
 		toast.style.visibility = "hidden";
-		setTimeout(function() { document.body.removeChild(toast) }, 500);
-	}
+		setTimeout(function() { document.body.removeChild(toast); }, 500);
+	};
 
 	styleToast();
 	appendToastToBody();
 
 	this.getToast = function() { // Public Getter
 		return toast;
-	}
+	};
 }
 
 function startToast(timer, hint, description, img) { //start all the process that show, wait and hide a toast
