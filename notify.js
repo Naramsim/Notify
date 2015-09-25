@@ -2,7 +2,7 @@ var toastHeight = 2.25 + "em";
 var toastHeightMedia = 4.25 + "em";
 var bgColor = "50, 50, 50";
 /*jshint multistr: true */
-/*eslint no-multi-str: 2*/
+/*eslint no-multi-str: 0*/
 var cssToast = 	"body { \
 						margin: 0 0 0 0; \
 					} \
@@ -106,7 +106,7 @@ function Toast (hint, desc, img) {
 
 function startToast(timer, hint, description, img) { //start all the process that show, wait and hide a toast
 	"use strict";
-	currentToast = new Toast(hint, description, img);
+	var currentToast = new Toast(hint, description, img);
 	currentToast.showToast();
 	//setTimeout(currentToast.hideToast, timer)
 }
