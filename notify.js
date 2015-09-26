@@ -1,5 +1,6 @@
 var toastHeight = 2.25 + "em";
 var toastHeightMedia = 4.25 + "em";
+var toastHeightSmall = 7.25 + "em";
 var bgColor = "50, 50, 50";
 /*jshint multistr: true */
 /*eslint no-multi-str: 0*/
@@ -31,7 +32,7 @@ var cssToast = 	"body { \
 					} \
 					.NotifyToastHint { \
 						color: rgb(49, 192, 243); cursor: pointer; \
-						transform: translateX(-50%) translateY(-50%);top: 50%;right: 4.25em;position: absolute; \
+						transform: translateY(-50%);top: 50%;right: 4.25em;position: absolute; \
 					} \
 					.NotifyToastDesc { \
 						position: absolute; width: 100%; text-align: center; \
@@ -46,6 +47,25 @@ var cssToast = 	"body { \
 						.NotifyImg { \
 							left: 1.25em; \
 						} \
+						.NotifyToastHint { \
+							right: 1.25em; \
+						} \
+					@media screen and (max-width:500px) {  \
+						.NotifyToast { \
+							height: " + toastHeightSmall + " \
+						} \
+						.NotifyImg { \
+							height: 41px; \
+							top: -29px; \
+						} \
+						.NotifyToastDesc { \
+							top: 78%; \
+							transform: ''; \
+						} \
+						.NotifyToastHint { \
+							top: 44px; \
+						} \
+					} \
 					@media only screen and (-webkit-min-device-pixel-ratio: 1.3), \
 							only screen and (-o-min-device-pixel-ratio: 13/10), \
 							only screen and (min-resolution: 120dpi){ \
@@ -73,7 +93,6 @@ function Toast (hint, desc, img) {
 
 	function createToast() { //Private
 		var toastElement = document.createElement("div");
-		//toastElement.innerHTML = innerToast
 		return toastElement;
 	}
 	var toast = createToast();
@@ -89,10 +108,11 @@ function Toast (hint, desc, img) {
 		setTimeout(function() { toast.classList.add("NotifyShow"); }, 90);
 		toast.style.visibility = "visible";
 	};
-	this.hideToast = function() { //Public 
+	this.hideToast = function(parameters, callback) { //Public 
 		toast.classList.remove("NotifyShow");
 		toast.classList.add("NotifyHide");
 		toast.style.visibility = "hidden";
+		callback.apply(this, parameters); //call the callback with all parameters inline
 		setTimeout(function() { document.body.removeChild(toast); }, 500);
 	};
 
@@ -104,11 +124,11 @@ function Toast (hint, desc, img) {
 	};
 }
 
-function startToast(timer, hint, description, img) { //start all the process that show, wait and hide a toast
+function startToast(timer, hint, description, img, callbackParameters, callback) { //start all the process that show, wait and hide a toast
 	"use strict";
 	var currentToast = new Toast(hint, description, img);
 	currentToast.showToast();
-	//setTimeout(currentToast.hideToast, timer)
+	setTimeout( function(){currentToast.hideToast(callbackParameters, callback);} , timer);
 }
 
 document.addEventListener("DOMContentLoaded", function(){
@@ -123,7 +143,10 @@ window.addEventListener("keydown", function(k) {
 	"use strict";
 	switch(k.keyCode) {
 		case 32: //up
-			startToast(2000, "WATH NOW!", "Sei conesso!", "https://lh5.googleusercontent.com/-zpbBgPjMIbs/AAAAAAAAAAI/AAAAAAAAAAA/hwgFO6TObQE/s32-c/photo.jpg" ); //timer, msg
+			startToast(2000, "WATH NOW!", "Sei conesso!", "https://lh5.googleusercontent.com/-zpbBgPjMIbs/AAAAAAAAAAI/AAAAAAAAAAA/hwgFO6TObQE/s32-c/photo.jpg", ["green", "0.4"], changeBackground ); //timer, msg
 		break;
 	}
 });
+
+
+
