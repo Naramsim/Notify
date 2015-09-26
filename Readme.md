@@ -11,12 +11,12 @@ Usage
 
 Include `Notify.js` in the document.
 
-```javascript
+```html
     <script type="text/javascript" src="notify.js"></script>
 ```
 
 Call `startToast` _wherever_, _whenever_, _however_ you want.
-```javascript
+```
     startToast(seconds to stay on, hint, description, URL of image, callback parameters, callback );
     startToast(int , str, str, str, array, function -> without parenthesis! );
 ```
