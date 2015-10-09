@@ -84,7 +84,7 @@ function Toast (hint, desc, img) {
 	this.img = img;
 
 	var innerToast = 	"<div class='NotifyToastContainer'>";
-	if (img.length > 0){
+	if (img != undefined){
 		innerToast += "<img class='NotifyImg' src='" + img + "'>";
 	}		
 	innerToast += "	<div class='NotifyToastDesc'>" + desc + "</div> \
@@ -128,7 +128,7 @@ function startToast(timer, hint, description, img, callbackParameters, callback)
 	"use strict";
 	var currentToast = new Toast(hint, description, img);
 	currentToast.showToast();
-	setTimeout( function(){currentToast.hideToast(callbackParameters, callback);} , timer);
+	//setTimeout( function(){currentToast.hideToast(callbackParameters, callback);} , timer);
 }
 
 document.addEventListener("DOMContentLoaded", function(){
@@ -144,6 +144,9 @@ window.addEventListener("keydown", function(k) {
 	switch(k.keyCode) {
 		case 32: //up
 			startToast(2000, "WATH NOW!", "Sei conesso!", "https://lh5.googleusercontent.com/-zpbBgPjMIbs/AAAAAAAAAAI/AAAAAAAAAAA/hwgFO6TObQE/s32-c/photo.jpg", ["green", "0.4"], changeBackground ); //timer, msg
+		break;
+		case 48: //up
+			startToast(2000, "WATH NOW!", "Sei conesso!"); //timer, msg
 		break;
 	}
 });
