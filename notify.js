@@ -128,7 +128,7 @@ function startToast(timer, hint, description, img, callbackParameters, callback)
 	"use strict";
 	var currentToast = new Toast(hint, description, img);
 	currentToast.showToast();
-	//setTimeout( function(){currentToast.hideToast(callbackParameters, callback);} , timer);
+	setTimeout( function(){currentToast.hideToast(callbackParameters, callback);} , timer);
 }
 
 document.addEventListener("DOMContentLoaded", function(){
