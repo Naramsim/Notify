@@ -8,6 +8,7 @@ var cssToast = 	"body { \
 						margin: 0 0 0 0; \
 					} \
 					.NotifyToast { \
+						z-index: 111; \
 						width: 100%; \
 						height: " + toastHeight + "; \
 						background-color: rgb(" + bgColor + "); \
