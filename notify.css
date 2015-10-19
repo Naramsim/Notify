@@ -1,0 +1,70 @@
+body {
+	margin: 0 0 0 0;
+}
+.NotifyToast {
+	z-index: 111;
+	width: 100%;
+	height: 2.25em;
+	background-color: rgb(50,50,50);
+	position: fixed;
+	bottom: -2.25em;
+	-webkit-transition :0.3s ease-in-out;
+	-moz-transition: 0.3s ease-in-out;
+	-o-transition: 0.3s ease-in-out;
+	transition: 0.3s ease-in-out;
+}
+.NotifyHide {
+	bottom: -2.25em;
+}
+.NotifyShow {
+	bottom: 0px;
+}
+.NotifyToastContainer {
+	position:relative; height:inherit;
+}
+.NotifyImg {
+	position: absolute;top: 0;  bottom: 0;  margin: auto; left: 4.25em; height: 32px;
+}
+.NotifyToastHint {
+	color: rgb(49, 192, 243); cursor: pointer;
+	transform: translateY(-50%);top: 50%;right: 4.25em;position: absolute;
+}
+.NotifyToastDesc {
+	position: absolute; width: 100%; text-align: center;
+	transform: translateY(-50%); top: 50%; color: rgb(244, 244, 244);
+}
+@media screen and (max-width:960px) { 
+	.NotifyToast {
+		height:4.25em;
+	}
+}
+@media screen and (max-width:630px) { 
+	.NotifyImg {
+		left: 1.25em;
+	}
+	.NotifyToastHint {
+		right: 1.25em;
+	}
+@media screen and (max-width:500px) { 
+	.NotifyToast {
+		height: 7.75em;
+	}
+	.NotifyImg {
+		height: 41px;
+		top: -29px;
+	}
+	.NotifyToastDesc {
+		top: 78%;
+		transform: '';
+	}
+	.NotifyToastHint {
+		top: 44px;
+	}
+}
+
+@media only screen and (-webkit-min-device-pixel-ratio: 1.3) only screen and (-o-min-device-pixel-ratio: 13/10) only screen and (min-resolution: 120dpi){
+		.NotifyToast{
+			/*height:4.25em;*/
+		}
+	}
+}

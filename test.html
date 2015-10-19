@@ -4,10 +4,28 @@
 	<meta name=viewport content="width=device-width, initial-scale=1">
 	<title>Notify Test</title>
 	<link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
-	<script type="text/javascript" src="test_functions.js"></script>
+	<link href="notify.css" rel="stylesheet" type="text/css">
 	<script type="text/javascript" src="notify.js"></script>
+	<script type="text/javascript" src="test_functions.js"></script>
+	
 </head>
 <body style="font-family: 'Open Sans', sans-serif;">
+	<script type="text/javascript">
+		var myToast = new Toast();
+		myToast.stayOnFor(2100);
+		myToast.start("Hi, page just loaded", "Browse now");
 
+		window.addEventListener("keydown", function(k) {
+			"use strict";
+			switch(k.keyCode) {
+				case 32:
+					myToast.start("WATH NOW!", "Sei conesso!", "https://lh5.googleusercontent.com/-zpbBgPjMIbs/AAAAAAAAAAI/AAAAAAAAAAA/hwgFO6TObQE/s32-c/photo.jpg", changeBackground, ["green", "0.4"] ); //timer, msg
+				break;
+				case 48:
+					myToast.start("WATH NOW!", "Sei conesso!"); //timer, msg
+				break;
+			}
+		});
+	</script>
 </body>
 </html>

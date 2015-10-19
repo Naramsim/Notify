@@ -1,156 +1,75 @@
-var toastHeight = 2.25 + "em";
-var toastHeightMedia = 4.25 + "em";
-var toastHeightSmall = 7.25 + "em";
-var bgColor = "50, 50, 50";
 /*jshint multistr: true */
 /*eslint no-multi-str: 0*/
-var cssToast = 	"body { \
-						margin: 0 0 0 0; \
-					} \
-					.NotifyToast { \
-						z-index: 111; \
-						width: 100%; \
-						height: " + toastHeight + "; \
-						background-color: rgb(" + bgColor + "); \
-						position: fixed; \
-						bottom: -" + toastHeight + "; \
-						-webkit-transition :0.3s ease-in-out; \
-						-moz-transition: 0.3s ease-in-out; \
-						-o-transition: 0.3s ease-in-out; \
-						transition: 0.3s ease-in-out; \
-					} \
-					.NotifyHide { \
-						bottom: -" + toastHeight + "; \
-					} \
-					.NotifyShow { \
-						bottom: 0px; \
-					} \
-					.NotifyToastContainer { \
-						position:relative; height:inherit; \
-					} \
-					.NotifyImg { \
-						position: absolute;top: 0;  bottom: 0;  margin: auto; left: 4.25em; height: 32px; \
-					} \
-					.NotifyToastHint { \
-						color: rgb(49, 192, 243); cursor: pointer; \
-						transform: translateY(-50%);top: 50%;right: 4.25em;position: absolute; \
-					} \
-					.NotifyToastDesc { \
-						position: absolute; width: 100%; text-align: center; \
-						transform: translateY(-50%); top: 50%; color: rgb(244, 244, 244); \
-					} \
-					@media screen and (max-width:960px) {  \
-						.NotifyToast { \
-							height: " + toastHeightMedia + " \
-						} \
-					} \
-					@media screen and (max-width:630px) {  \
-						.NotifyImg { \
-							left: 1.25em; \
-						} \
-						.NotifyToastHint { \
-							right: 1.25em; \
-						} \
-					@media screen and (max-width:500px) {  \
-						.NotifyToast { \
-							height: " + toastHeightSmall + " \
-						} \
-						.NotifyImg { \
-							height: 41px; \
-							top: -29px; \
-						} \
-						.NotifyToastDesc { \
-							top: 78%; \
-							transform: ''; \
-						} \
-						.NotifyToastHint { \
-							top: 44px; \
-						} \
-					} \
-					@media only screen and (-webkit-min-device-pixel-ratio: 1.3), \
-							only screen and (-o-min-device-pixel-ratio: 13/10), \
-							only screen and (min-resolution: 120dpi){ \
-								.NotifyToast{ \
-									//height: " + toastHeightMedia + " \
-								} \
-							} \
-					}";
 
 
-function Toast (hint, desc, img) {
+
+function Toast () {
 	"use strict";
 
-	this.hint = hint;
-	this.desc = desc;
-	this.img = img;
-
-	var innerToast = 	"<div class='NotifyToastContainer'>";
-	if (img != undefined){
-		innerToast += "<img class='NotifyImg' src='" + img + "'>";
-	}		
-	innerToast += "	<div class='NotifyToastDesc'>" + desc + "</div> \
-					<div class='NotifyToastHint'>" + hint + "</div> \
-					</div>";
-
+	/* when a new toast is created, a new div is created*/
 	function createToast() { //Private
 		var toastElement = document.createElement("div");
 		return toastElement;
 	}
 	var toast = createToast();
+	var timer = 2000;
+	appendToastToBody();
 	
-	function styleToast() { //Private
+	function styleToast(inside) { //Private
 		setTimeout(function() { toast.classList.add("NotifyToast");
-								toast.innerHTML = innerToast; }, 0);
+								toast.innerHTML = inside; }, 0);
 	}
 	function appendToastToBody() { //Private
 		document.body.appendChild(toast);
 	}
-	this.showToast = function() { //Public 
+	function showToast() { //Public 
 		setTimeout(function() { toast.classList.add("NotifyShow"); }, 90);
 		toast.style.visibility = "visible";
-	};
-	this.hideToast = function(parameters, callback) { //Public 
+	}
+	function hideToast(parameters, callback) { //Public 
 		toast.classList.remove("NotifyShow");
 		toast.classList.add("NotifyHide");
 		toast.style.visibility = "hidden";
 		callback.apply(this, parameters); //call the callback with all parameters inline
 		setTimeout(function() { document.body.removeChild(toast); }, 500);
+	}
+	function prepareToast (hint, description, img) {
+		var DomElement = 	"<div class='NotifyToastContainer'>";
+		if (img != undefined){
+			DomElement += "<img class='NotifyImg' src='" + img + "'>";
+		}		
+		DomElement += "	<div class='NotifyToastDesc'>" + description + "</div> \
+						<div class='NotifyToastHint'>" + hint + "</div> \
+						</div>";
+		styleToast(DomElement);
+	}
+
+	this.start = function ( hint, description, img, callback, callbackParameters ) {
+		prepareToast(hint, description, img);
+		showToast();
+		setTimeout( function(){
+			hideToast(callbackParameters, callback);
+		} , timer);
 	};
 
-	styleToast();
-	appendToastToBody();
+	this.stayOnFor = function (milliseconds) {
+		timer = milliseconds;
+	}
 
 	this.getToast = function() { // Public Getter
 		return toast;
 	};
 }
 
-function startToast(timer, hint, description, img, callbackParameters, callback) { //start all the process that show, wait and hide a toast
+function startToast(timer, hint, description, img, callback, callbackParameters) { //not setup required for this call
 	"use strict";
-	var currentToast = new Toast(hint, description, img);
-	currentToast.showToast();
-	setTimeout( function(){currentToast.hideToast(callbackParameters, callback);} , timer);
+	var currentToast = new Toast();
+	console.log(timer)
+	currentToast.stayOnFor(timer);
+	currentToast.start(hint, description, img, callback, callbackParameters);
 }
 
-document.addEventListener("DOMContentLoaded", function(){
-	"use strict";
-	var css = document.createElement("style");
-	css.type = "text/css";
-	css.innerHTML = cssToast;
-	document.body.appendChild(css);
-});
 
-window.addEventListener("keydown", function(k) {
-	"use strict";
-	switch(k.keyCode) {
-		case 32: //up
-			startToast(2000, "WATH NOW!", "Sei conesso!", "https://lh5.googleusercontent.com/-zpbBgPjMIbs/AAAAAAAAAAI/AAAAAAAAAAA/hwgFO6TObQE/s32-c/photo.jpg", ["green", "0.4"], changeBackground ); //timer, msg
-		break;
-		case 48: //up
-			startToast(2000, "WATH NOW!", "Sei conesso!"); //timer, msg
-		break;
-	}
-});
 
 
 

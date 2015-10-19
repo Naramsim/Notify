@@ -5,3 +5,6 @@ function changeBackground (color, opacity) {
 	console.log(color);
 	console.log(opacity);
 }
+
+
+
