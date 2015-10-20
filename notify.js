@@ -1,8 +1,3 @@
-/*jshint multistr: true */
-/*eslint no-multi-str: 0*/
-
-
-
 function Toast () {
 	"use strict";
 
@@ -13,6 +8,7 @@ function Toast () {
 	}
 	var toast = createToast();
 	var timer = 2000;
+	var isOn = false;
 	appendToastToBody();
 	
 	function styleToast(inside) { //Private
@@ -25,17 +21,24 @@ function Toast () {
 	function showToast() { //Public 
 		setTimeout(function() { toast.classList.add("NotifyShow"); }, 90);
 		toast.style.visibility = "visible";
+		isOn = true;
 	}
-	function hideToast(parameters, callback) { //Public 
+	function applyUserCallback(callback, parameters) { //Public 
+		if(parameters !== undefined) {
+			callback.apply(this, parameters); //call the callback with all parameters inline
+		}else {
+			callback.apply();
+		}
+	}
+	function hideToast() {
 		toast.classList.remove("NotifyShow");
 		toast.classList.add("NotifyHide");
 		toast.style.visibility = "hidden";
-		callback.apply(this, parameters); //call the callback with all parameters inline
-		setTimeout(function() { document.body.removeChild(toast); }, 500);
+		isOn = false;
 	}
 	function prepareToast (hint, description, img) {
 		var DomElement = 	"<div class='NotifyToastContainer'>";
-		if (img != undefined){
+		if (img !== undefined){
 			DomElement += "<img class='NotifyImg' src='" + img + "'>";
 		}		
 		DomElement += "	<div class='NotifyToastDesc'>" + description + "</div> \
@@ -45,11 +48,20 @@ function Toast () {
 	}
 
 	this.start = function ( hint, description, img, callback, callbackParameters ) {
-		prepareToast(hint, description, img);
-		showToast();
-		setTimeout( function(){
-			hideToast(callbackParameters, callback);
-		} , timer);
+		if(isOn === false) {
+			prepareToast(hint, description, img);
+			showToast();
+			setTimeout( function(){
+				if(callbackParameters !== undefined) {
+					applyUserCallback(callback, callbackParameters);
+				}else if(callbackParameters === undefined) {
+					if(callback !== undefined){
+						applyUserCallback(callback);
+					}
+				}
+				hideToast();
+			}, timer);
+		}
 	};
 
 	this.stayOnFor = function (milliseconds) {

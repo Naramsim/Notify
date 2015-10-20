@@ -17,7 +17,7 @@ body {
 	bottom: -2.25em;
 }
 .NotifyShow {
-	bottom: 0px;
+	bottom: 0;
 }
 .NotifyToastContainer {
 	position:relative; height:inherit;
@@ -59,12 +59,5 @@ body {
 	}
 	.NotifyToastHint {
 		top: 44px;
-	}
-}
-
-@media only screen and (-webkit-min-device-pixel-ratio: 1.3) only screen and (-o-min-device-pixel-ratio: 13/10) only screen and (min-resolution: 120dpi){
-		.NotifyToast{
-			/*height:4.25em;*/
-		}
 	}
 }
