@@ -12,11 +12,25 @@ Usage
 Include `Notify.js` in the document.
 
 ```html
+    <link href="notify.css" rel="stylesheet" type="text/css">
     <script type="text/javascript" src="notify.js"></script>
 ```
 
-Call `startToast` _wherever_, _whenever_, _however_ you want.
+Quick usage: call `startToast()` _wherever_, _whenever_, _however_ you want.
 ```
-    startToast(seconds to stay on, hint, description, URL of image, callback parameters, callback );
-    startToast(int , str, str, str, array, function -> without parenthesis! );
+    startToast(seconds to stay on, hint, description, URL of image, callback, callback parameters );
+    startToast(int , str, str, str, function -> without parenthesis!, array );
+    
+    Example:
+    startToast(2000,"Hi","First Toast");
+```
+
+Or create a new Toast object
+```javascript
+    var myToast = new Toast(); //create the object
+	myToast.stayOnFor(2100);//set the default time that toast will remain on
+	myToast.start("Hi, page just loaded", "Browse me");//display the toast
+	setTimeout(function(){
+	    myToast.start("WATCH NOW!", "You are connected!", "https://lh5.googleusercontent.com/-zpbBgPjMIbs/AAAAAAAAAAI/AAAAAAAAAAA/hwgFO6TObQE/s32-c/photo.jpg", changeBackground, ["green", "0.4"] );
+	},5000);
 ```
