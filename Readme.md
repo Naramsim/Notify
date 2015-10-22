@@ -29,6 +29,10 @@ Quick usage: call `startToast()` _wherever_, _whenever_, _however_ you want.
     startToast(2000,"Hi","First Toast");
 ```
 
+Font Awesome support!
+``` javascript
+	startToast(1000,"AWESOME","FontAwesome","fa fa-github") //just insert the classes needed and you are good to go
+```
 Or create a new Toast object
 ```javascript
     var myToast = new Toast(); //create the object
