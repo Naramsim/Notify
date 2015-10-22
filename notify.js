@@ -1,3 +1,6 @@
+/*jshint multistr: true */
+/*eslint no-multi-str: 0*/
+
 function Toast () {
 	"use strict";
 
@@ -37,9 +40,15 @@ function Toast () {
 		isOn = false;
 	}
 	function prepareToast (hint, description, img) {
+		console.log(img)
 		var DomElement = 	"<div class='NotifyToastContainer'>";
 		if (img !== undefined){
-			DomElement += "<img class='NotifyImg' src='" + img + "'>";
+			if (img.indexOf("fa") > -1) { // FontAwesome
+				DomElement += "<i class='NotifyImg AwesomeImg " + img + "'></i>"
+			} else { // normal image link
+				DomElement += "<img class='NotifyImg' src='" + img + "'>";
+			}
+			
 		}		
 		DomElement += "	<div class='NotifyToastDesc'>" + description + "</div> \
 						<div class='NotifyToastHint'>" + hint + "</div> \
@@ -66,7 +75,7 @@ function Toast () {
 
 	this.stayOnFor = function (milliseconds) {
 		timer = milliseconds;
-	}
+	};
 
 	this.getToast = function() { // Public Getter
 		return toast;
@@ -76,7 +85,6 @@ function Toast () {
 function startToast(timer, hint, description, img, callback, callbackParameters) { //not setup required for this call
 	"use strict";
 	var currentToast = new Toast();
-	console.log(timer)
 	currentToast.stayOnFor(timer);
 	currentToast.start(hint, description, img, callback, callbackParameters);
 }

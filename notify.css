@@ -33,6 +33,10 @@ body {
 	position: absolute; width: 100%; text-align: center;
 	transform: translateY(-50%); top: 50%; color: rgb(244, 244, 244);
 }
+.AwesomeImg {
+	font-size: 33px;
+	color: #eee;
+}
 @media screen and (max-width:960px) { 
 	.NotifyToast {
 		height:4.25em;
@@ -45,6 +49,7 @@ body {
 	.NotifyToastHint {
 		right: 1.25em;
 	}
+}
 @media screen and (max-width:500px) { 
 	.NotifyToast {
 		height: 7.75em;
