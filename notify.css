@@ -8,37 +8,55 @@ body {
 	background-color: rgb(50,50,50);
 	position: fixed;
 	bottom: -2.25em;
+}
+.NotifyToast, .NotifyToastContainer {
 	-webkit-transition :0.3s ease-in-out;
 	-moz-transition: 0.3s ease-in-out;
 	-o-transition: 0.3s ease-in-out;
 	transition: 0.3s ease-in-out;
 }
 .NotifyHide {
-	bottom: -2.25em;
+	bottom: -3.25em !important;
 }
 .NotifyShow {
 	bottom: 0;
 }
 .NotifyToastContainer {
-	position:relative; height:inherit;
+	position:relative; 
+	height:inherit; 
+	bottom: 0;
 }
 .NotifyImg {
-	position: absolute;top: 0;  bottom: 0;  margin: auto; left: 4.25em; height: 32px;
+	top: 0;  
+	bottom: 0;  
+	margin: auto; 
+	left: 4.25em; 
+	height: 32px;
+}
+.NotifyToastHint, .NotifyToastDesc, .NotifyImg {
+	position: absolute;
+}
+.NotifyToastHint, .NotifyToastDesc {
+	transform: translateY(-50%);
+	top: 50%;
 }
 .NotifyToastHint {
-	color: rgb(49, 192, 243); cursor: pointer;
-	transform: translateY(-50%);top: 50%;right: 4.25em;position: absolute;
+	color: rgb(49, 192, 243); 
+	cursor: pointer;
+	right: 4.25em;
 }
 .NotifyToastDesc {
-	position: absolute; width: 100%; text-align: center;
-	transform: translateY(-50%); top: 50%; color: rgb(244, 244, 244);
+	width: 100%; 
+	text-align: center;
+	color: rgb(244, 244, 244);
 }
 .AwesomeImg {
 	font-size: 33px;
 	color: #eee;
+	background-color: rgb(50,50,50);
 }
 @media screen and (max-width:960px) { 
-	.NotifyToast {
+	.NotifyShow {
 		height:4.25em;
 	}
 }
@@ -51,18 +69,20 @@ body {
 	}
 }
 @media screen and (max-width:500px) { 
-	.NotifyToast {
-		height: 7.75em;
-	}
 	.NotifyImg {
 		height: 41px;
+		border: 5px solid rgb(50,50,50);
+		border-radius: 5px;
+	}
+	.NotifyShow .NotifyImg {
 		top: -29px;
 	}
-	.NotifyToastDesc {
-		top: 78%;
-		transform: '';
+	.NotifyHide .NotifyImg {
+		top: -29px;
+		transition: .8s;
+		opacity: 0;
 	}
-	.NotifyToastHint {
-		top: 44px;
+	.NotifyImg {
+		top: 20px;
 	}
 }
