@@ -85,4 +85,9 @@ body {
 	.NotifyImg {
 		top: 20px;
 	}
+	.NotifyToastDesc {
+		max-width: 200px;
+		left: 25%;
+		text-align: center;
+	}
 }
