@@ -32,6 +32,7 @@ body {
 	margin: auto; 
 	left: 4.25em; 
 	height: 32px;
+	background-color: rgb(50,50,50);
 }
 .NotifyToastHint, .NotifyToastDesc, .NotifyImg {
 	position: absolute;
@@ -53,7 +54,6 @@ body {
 .AwesomeImg {
 	font-size: 33px;
 	color: #eee;
-	background-color: rgb(50,50,50);
 }
 @media screen and (max-width:960px) { 
 	.NotifyShow {
