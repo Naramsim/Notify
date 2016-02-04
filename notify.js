@@ -113,7 +113,7 @@ function Toast () {
 						setTimeout(function(){tthis.start(nxt[0],nxt[1],nxt[2],nxt[3],nxt[4]);},500);
 					}else {
 						comingFromQueue = false;
-						hideToast();
+						tthis.hideToast();
 					}
 				}, timer);
 			}else if(timer === "persistent") {
