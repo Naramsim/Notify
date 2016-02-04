@@ -1,5 +1,5 @@
 {
-  "name": "notify",
+  "name": "Notify",
   "version": "1.0.0",
   "description": "Add beautiful toasts to your site(Android Marshmallow style)",
   "main": "gulpfile.js",
@@ -11,7 +11,8 @@
   },
   "devDependencies": {},
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "min": "gulp"
   },
   "repository": {
     "type": "git",

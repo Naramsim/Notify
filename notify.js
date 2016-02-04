@@ -12,7 +12,7 @@ function Toast () {
 	var toast = createToast();
 	var timer = 2000;
 	var isOn = false;
-	var cue = [];
+	var queue = [];
 	var comingFromQueue = false;
 	appendToastToBody();
 	
@@ -24,10 +24,10 @@ function Toast () {
 	function createDomElemContainer (inside) {
 		setTimeout(function() { toast.innerHTML = inside; }, 0);
 	}
-	function appendToastToBody() { //Private
+	function appendToastToBody() {
 		document.body.appendChild(toast);
 	}
-	function showToast(container) { //Public 
+	function showToast(container) {
 		if(container === true) {
 			setTimeout(function() { 
 			toast.children[0].classList.remove("NotifyHide");
@@ -38,14 +38,14 @@ function Toast () {
 		}
 		isOn = true;
 	}
-	function applyUserCallback(callback, parameters) { //Public 
+	function applyUserCallback(callback, parameters) {
 		if(parameters !== undefined) {
 			callback.apply(this, parameters); //call the callback with all parameters inline
 		}else {
 			callback.apply();
 		}
 	}
-	function hideToast() {
+	this.hideToast = function() {
 		toast.classList.remove("NotifyShow");
 		toast.classList.add("NotifyHide");
 		toast.style.visibility = "hidden";
@@ -56,6 +56,13 @@ function Toast () {
 		toast.children[0].classList.add("NotifyHide");
 		isOn = false;
 	}
+	function addCloseEvent(tthis) {
+		setTimeout(function(){
+			toast.getElementsByClassName("close")[0].addEventListener('click', function() {
+				tthis.hideToast();
+			}, false);
+		}, 50);
+	}
 	function prepareToast (description, hint, img, container) {
 		var DomElement = "";
 		if(container){
@@ -65,16 +72,16 @@ function Toast () {
 		}
 		if(img !== undefined) {
 			if (img.indexOf("fa") > -1) { // FontAwesome
-				DomElement += "<i class='NotifyImg AwesomeImg " + img + "'></i>"
+				DomElement += "<i class='NotifyImg AwesomeImg " + img + "'></i>";
 			} else { // normal image link
 				DomElement += "<img class='NotifyImg' src='" + img + "'>";
 			}
 		}		
-		DomElement += "	<div class='NotifyToastDesc'>" + description + "</div>"
+		DomElement += "	<div class='NotifyToastDesc'>" + description + "</div>";
 		if(hint !== undefined ) {
-			DomElement += " <div class='NotifyToastHint'>" + hint + "</div>"
+			DomElement += " <div class='NotifyToastHint'>" + hint + "</div>";
 		}
-		
+		DomElement +="<img class='close' src='http://i.imgur.com/TnQ4GIP.png'>"
 		DomElement += "	</div>";
 		if(container){
 			createDomElemContainer(DomElement);
@@ -88,27 +95,33 @@ function Toast () {
 			prepareToast(description, hint, img, comingFromQueue);
 			showToast(comingFromQueue);
 			var tthis = this;
-			setTimeout( function(){
-				if(callbackParameters !== undefined) {
-					applyUserCallback(callback, callbackParameters);
-				}else if(callbackParameters === undefined) {
-					if(callback !== undefined){
-						applyUserCallback(callback);
+			if(timer !== "persistent"){
+				toast.classList.remove("persistent");
+				setTimeout( function(){
+					if(callbackParameters !== undefined) {
+						applyUserCallback(callback, callbackParameters);
+					}else if(callbackParameters === undefined) {
+						if(callback !== undefined){
+							applyUserCallback(callback);
+						}
 					}
-				}
-				if(cue.length > 0) {
-					hideContainer();
-					var nxt = cue[0];
-					cue.splice(0,1);
-					comingFromQueue = true;
-					setTimeout(function(){tthis.start(nxt[0],nxt[1],nxt[2],nxt[3],nxt[4]);},500);
-				}else {
-					comingFromQueue = false;
-					hideToast();
-				}
-			}, timer);
+					if(queue.length > 0) {
+						hideContainer();
+						var nxt = queue[0];
+						queue.splice(0,1);
+						comingFromQueue = true;
+						setTimeout(function(){tthis.start(nxt[0],nxt[1],nxt[2],nxt[3],nxt[4]);},500);
+					}else {
+						comingFromQueue = false;
+						hideToast();
+					}
+				}, timer);
+			}else if(timer === "persistent") {
+				toast.classList.add("persistent");
+				addCloseEvent(this);
+			}
 		}else { //queue the notification
-			cue.push([description, hint, img, callback, callbackParameters]);
+			queue.push([description, hint, img, callback, callbackParameters]);
 		}
 	};
 

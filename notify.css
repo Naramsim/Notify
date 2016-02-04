@@ -16,7 +16,7 @@ body {
 	transition: 0.3s ease-in-out;
 }
 .NotifyHide {
-	bottom: -3.25em !important;
+	bottom: -3.25em;
 }
 .NotifyShow {
 	bottom: 0;
@@ -50,6 +50,18 @@ body {
 	width: 100%; 
 	text-align: center;
 	color: rgb(244, 244, 244);
+}
+.close {
+	display: none;
+}
+.persistent .close {
+	display: block;
+	position: absolute;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    right: 14px;
+    cursor: pointer;
 }
 .AwesomeImg {
 	font-size: 33px;
