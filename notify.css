@@ -73,6 +73,9 @@ body {
 	}
 }
 @media screen and (max-width:630px) { 
+	.NotifyToastContainer > .close {
+		display: none;
+	}
 	.NotifyImg {
 		left: 1.25em;
 	}

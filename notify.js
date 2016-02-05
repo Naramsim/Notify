@@ -14,6 +14,9 @@ function Toast () {
 	var isOn = false;
 	var queue = [];
 	var comingFromQueue = false;
+	var xDown = null;                                                        
+	var yDown = null;                                                        
+
 	appendToastToBody();
 	
 	function createDomElem(inside) { //Private
@@ -61,6 +64,8 @@ function Toast () {
 			toast.getElementsByClassName("close")[0].addEventListener('click', function() {
 				tthis.hideToast();
 			}, false);
+			toast.addEventListener('touchstart', handleTouchStart, false);        
+			toast.addEventListener('touchmove', function(e){handleTouchMove(e, tthis)}, false);
 		}, 50);
 	}
 	function prepareToast (description, hint, img, container) {
@@ -89,6 +94,41 @@ function Toast () {
 			createDomElem(DomElement);
 		}
 	}
+
+
+	function handleTouchStart(evt) {                                         
+	    xDown = evt.touches[0].clientX;                                      
+	    yDown = evt.touches[0].clientY;                                      
+	};                                                
+
+	function handleTouchMove(evt, toast) {
+	    if ( ! xDown || ! yDown ) {
+	        return;
+	    }
+
+	    var xUp = evt.touches[0].clientX;                                    
+	    var yUp = evt.touches[0].clientY;
+
+	    var xDiff = xDown - xUp;
+	    var yDiff = yDown - yUp;
+
+	    if ( Math.abs( xDiff ) > Math.abs( yDiff ) ) {/*most significant*/
+	        if ( xDiff > 0 ) {
+	            /* left */
+	        } else {
+	            /* right */
+	        }                       
+	    } else {
+	        if ( yDiff > 0 ) {
+	            /* up swipe */ 
+	        } else { 
+	            toast.hideToast();
+	        }                                                                 
+	    }
+	    /* reset values */
+	    xDown = null;
+	    yDown = null;                                             
+	};
 
 	this.start = function (description, hint, img, callback, callbackParameters) {
 		if(isOn === false) { //show the notification
