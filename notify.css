@@ -3,11 +3,14 @@ body {
 }
 .NotifyToast {
 	z-index: 111;
-	width: 100%;
+	width: 80%;
 	height: 2.25em;
 	background-color: rgb(50,50,50);
 	position: fixed;
+	left: 10%;
 	bottom: -2.25em;
+	border-top-left-radius: 2px;
+	border-top-right-radius: 2px;
 }
 .NotifyToast{
 	-webkit-transition :0.3s ease-in-out;
@@ -68,6 +71,12 @@ body {
 	color: #eee;
 }
 @media screen and (max-width:960px) { 
+	.NotifyToast {
+		width: 100%;
+		left: 0;
+		border-top-left-radius: 2px;
+		border-top-right-radius: 2px;
+	}
 	.NotifyShow {
 		height:4.25em;
 	}
