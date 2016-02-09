@@ -105,6 +105,9 @@ body {
 		transition: .8s;
 		opacity: 0;
 	}
+	.doubleLine .NotifyImg {
+		top: -95px;
+	}
 	.NotifyImg {
 		top: 20px;
 	}

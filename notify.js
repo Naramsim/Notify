@@ -11,6 +11,8 @@ function Toast () {
 	}
 	var toast = createToast();
 	var timer = 2000;
+	var colorHint = "#31c0f3";
+	var toastHeight = "4.5em"
 	var isOn = false;
 	var queue = [];
 	var comingFromQueue = false;
@@ -19,7 +21,7 @@ function Toast () {
 
 	appendToastToBody();
 	
-	function createDomElem(inside) { //Private
+	function createDomElem(inside) {
 		toast.classList.remove("NotifyHide");
 		setTimeout(function() { toast.classList.add("NotifyToast");
 								toast.innerHTML = inside; }, 0);
@@ -68,6 +70,11 @@ function Toast () {
 			toast.addEventListener('touchmove', function(e){handleTouchMove(e, tthis)}, false);
 		}, 50);
 	}
+	function changeHeight() {
+		toast.style.height = toastHeight;
+		if(toastHeight === "7.5em"){toast.classList.add("doubleLine");}
+		else{toast.classList.remove("doubleLine");}
+	}
 	function prepareToast (description, hint, img, container) {
 		var DomElement = "";
 		if(container){
@@ -84,7 +91,7 @@ function Toast () {
 		}		
 		DomElement += "	<div class='NotifyToastDesc'>" + description + "</div>";
 		if(hint !== undefined ) {
-			DomElement += " <div class='NotifyToastHint'>" + hint + "</div>";
+			DomElement += " <div style='color:" + colorHint + ";'' class='NotifyToastHint'>" + hint + "</div>";
 		}
 		DomElement +="<img class='close' src='http://i.imgur.com/TnQ4GIP.png'>"
 		DomElement += "	</div>";
@@ -93,6 +100,7 @@ function Toast () {
 		}else {
 			createDomElem(DomElement);
 		}
+		changeHeight();
 	}
 
 
@@ -168,6 +176,15 @@ function Toast () {
 	this.stayOnFor = function (milliseconds) {
 		timer = milliseconds;
 	};
+
+	this.setColorHint = function (color) {
+		colorHint = color;
+	}
+
+	this.setLine = function (type) {
+		if(type === "doubleLine") { toastHeight = "7.5em";}
+		else {toastHeight = "4.5em";}
+	}
 
 	this.getToast = function() {
 		return toast;
