@@ -12,7 +12,7 @@ function Toast () {
 	var toast = createToast();
 	var timer = 2000;
 	var colorHint = "#31c0f3";
-	var toastHeight = "4.5em"
+	var toastHeight = "4.5em";
 	var isOn = false;
 	var queue = [];
 	var comingFromQueue = false;
@@ -55,7 +55,7 @@ function Toast () {
 		toast.classList.add("NotifyHide");
 		toast.style.visibility = "hidden";
 		isOn = false;
-	}
+	};
 	function hideContainer() {
 		toast.children[0].classList.remove("NotifyShow");
 		toast.children[0].classList.add("NotifyHide");
@@ -67,7 +67,7 @@ function Toast () {
 				tthis.hideToast();
 			}, false);
 			toast.addEventListener('touchstart', handleTouchStart, false);        
-			toast.addEventListener('touchmove', function(e){handleTouchMove(e, tthis)}, false);
+			toast.addEventListener('touchmove', function(e){handleTouchMove(e, tthis);}, false);
 		}, 50);
 	}
 	function changeHeight() {
@@ -93,7 +93,7 @@ function Toast () {
 		if(hint !== undefined ) {
 			DomElement += " <div style='color:" + colorHint + ";'' class='NotifyToastHint'>" + hint + "</div>";
 		}
-		DomElement +="<img class='close' src='http://i.imgur.com/TnQ4GIP.png'>"
+		DomElement +="<img class='close' src='http://i.imgur.com/TnQ4GIP.png'>";
 		DomElement += "	</div>";
 		if(container){
 			createDomElemContainer(DomElement);
@@ -105,18 +105,16 @@ function Toast () {
 
 
 	function handleTouchStart(evt) {                                         
-	    xDown = evt.touches[0].clientX;                                      
-	    yDown = evt.touches[0].clientY;                                      
-	};                                                
+	    xDown = evt.touches[0].clientX;
+	    yDown = evt.touches[0].clientY;
+	}
 
 	function handleTouchMove(evt, toast) {
 	    if ( ! xDown || ! yDown ) {
 	        return;
 	    }
-
 	    var xUp = evt.touches[0].clientX;                                    
 	    var yUp = evt.touches[0].clientY;
-
 	    var xDiff = xDown - xUp;
 	    var yDiff = yDown - yUp;
 
@@ -136,7 +134,7 @@ function Toast () {
 	    /* reset values */
 	    xDown = null;
 	    yDown = null;                                             
-	};
+	}
 
 	this.start = function (description, hint, img, callback, callbackParameters) {
 		if(isOn === false) { //show the notification
@@ -179,12 +177,12 @@ function Toast () {
 
 	this.setColorHint = function (color) {
 		colorHint = color;
-	}
+	};
 
 	this.setLine = function (type) {
 		if(type === "doubleLine") { toastHeight = "7.5em";}
 		else {toastHeight = "4.5em";}
-	}
+	};
 
 	this.getToast = function() {
 		return toast;

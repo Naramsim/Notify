@@ -51,3 +51,16 @@ setTimeout(function(){
 ``` javascript
 startToast(1000, "FontAwesome" ,"AWESOME" ,"fa fa-github") //just insert the classes needed and you are good to go
 ```
+
+Build
+---
+Fork and install
+```
+git fork https://github.com/Naramsim/Notify
+npm install
+npm run min
+```
+
+License
+---
+MIT[@Naramsim](https://github.com/Naramsim)

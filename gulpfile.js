@@ -1,7 +1,7 @@
 var gulp = require('gulp');
 var uglify = require('gulp-uglify');
 var rename = require("gulp-rename");
-var minifyCss = require('gulp-minify-css');
+var cssnano = require('gulp-cssnano');
 
 gulp.task('default', ['compress','minify-css']);
 gulp.task('compress', function() {
@@ -13,7 +13,7 @@ gulp.task('compress', function() {
 
 gulp.task('minify-css', function() {
   return gulp.src('notify.css')
-    .pipe(minifyCss({compatibility: 'ie8'}))
+    .pipe(cssnano())
     .pipe(rename("notify.min.css"))
     .pipe(gulp.dest('dist'));
 });
