@@ -40,12 +40,12 @@
           <h3>
 <a class="anchor" href="#what-is-this" aria-hidden="true"><span class="octicon octicon-link"></span></a>What is this?</h3>
 
-<p>Notify is a simple and lightweight library that helps you to display beautiful toasts. It is inspired by the new concept that Android is pushing on Marshmallow OS, which can be see here: <a href="https://www.google.com/design/spec/components/snackbars-toasts.html#snackbars-toasts-specs">Material Android</a></p>
+<p>Notify is a simple and lightweight library that helps you to display beautiful responsive toasts. It is inspired by the new concept that Android is pushing on Marshmallow OS, which can be see here: <a href="https://www.google.com/design/spec/components/snackbars-toasts.html#snackbars-toasts-specs">Material Android</a>. No jQuery needed!</p>
 
 <h3>
 <a class="anchor" href="#designer-templates" aria-hidden="true"><span class="octicon octicon-link"></span></a>Can I see a demo?</h3>
 
-<p>Of course you can. Try with the buttons below or press "n" on the keyboard</p>
+<p>Of course you can. Try with the buttons below or press <kbd>n</kbd> or <kbd>t</kbd> on the keyboard</p>
 
 <div class="pure-g">
     <div class="pure-u-1-4 button-container">
@@ -71,8 +71,8 @@
 
 <pre>
 	<code class="html">
-&lt;script type=&quot;text/javascript&quot; src=&quot;notify.js&quot;&gt;&lt;/script&gt;
-&lt;script type=&quot;text/javascript&quot; src=&quot;test_functions.js&quot;&gt;&lt;/script&gt;
+&lt;link href=&quot;https://cdn.rawgit.com/Naramsim/Notify/master/dist/notify.min.css&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot;&gt;
+&lt;script type=&quot;text/javascript&quot; src=&quot;https://cdn.rawgit.com/Naramsim/Notify/master/dist/notify.min.js&quot;&gt;&lt;/script&gt;
 	</code>
 </pre>
 
@@ -83,7 +83,6 @@
 &lt;script type=&quot;text/javascript&quot;&gt;
 	var myToast = new Toast();
 	myToast.stayOnFor(2100);
-	//myToast.stayOnFor("persistent"); // to get a persistent toast
 &lt;/script&gt;
 	</code>
 </pre>
@@ -98,9 +97,24 @@ myToast.start("HINT", "Description", "https://url-of-img.jpg", callback, [parame
 </pre>
 
 <h3>
+<a id="api" class="anchor" href="#api" aria-hidden="true"><span class="octicon octicon-link"></span></a>API</h3>
+<pre>
+  <code class="javascript">
+    var myToast = new Toast();
+    myToast.stayOnFor(2100); // 2.1s
+    myToast.stayOnFor("persistent"); // to get a persistent toast
+    myToast.setColorHint("green"); //change right text color
+    myToast.setLine("doubleLine"); //increment toast height for displaying much text
+    myToast.setLine("singleLine"); //reset height to normal
+    myToast.hide(); // you know what it does
+    myToast.getToast(); //returns HTML DOM of the toast
+  </code>
+</pre>
+
+<h3>
 <a id="authors-and-contributors" class="anchor" href="#authors-and-contributors" aria-hidden="true"><span class="octicon octicon-link"></span></a>Authors and Contributors</h3>
 
-<p>Alessandro Pezzè <a href="https://github.com/Naramsim93" class="user-mention">@Naramsim</a></p>
+<p>Alessandro Pezzè <a href="https://github.com/Naramsim" class="user-mention">@Naramsim</a></p>
 
 <h3>
 <a class="anchor" href="#are-you-lazy" aria-hidden="true"><span class="octicon octicon-link"></span></a>Are you lazy?</h3>
@@ -108,8 +122,8 @@ myToast.start("HINT", "Description", "https://url-of-img.jpg", callback, [parame
 <p>Just include the css and the js and call this function.</p>
 <pre>
 	<code class="javascript">
-startToast(2000,"Hi","First Toast");
-startToast(3000,"Ih","Second Toast","url-img",callbak,[parameters]);
+startToast(2000,"HI","First Toast");
+startToast(3000,"HELLO","Second Toast","url-img",callback,[parameters]);
 	</code>
 </pre>
 

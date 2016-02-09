@@ -22,9 +22,9 @@ window.addEventListener("keydown", function(k) {
 	"use strict";
 	switch(k.keyCode) {
 		case 78:
-			myToast.start("So, you have pressed key 'N'...", "WELL DONE", "images/awesome.png"); //timer, msg
+			myToast.start("So, you have pressed key <kbd>n</kbd>...", "WELL DONE", "images/awesome.png"); //timer, msg
 		break;
-		case 48:
+		case 84:
 			myToast.start("Connected!", "HI!"); //timer, msg
 		break;
 	}
