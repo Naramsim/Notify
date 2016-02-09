@@ -12,14 +12,18 @@ body {
 	border-top-left-radius: 2px;
 	border-top-right-radius: 2px;
 }
-.NotifyToast{
+.NotifyToast, .NotifyToastContainer{
 	-webkit-transition :0.3s ease-in-out;
 	-moz-transition: 0.3s ease-in-out;
 	-o-transition: 0.3s ease-in-out;
 	transition: 0.3s ease-in-out;
 }
 .NotifyHide {
-	bottom: -3.25em;
+	bottom: -4.25em;
+}
+
+.NotifyToast .NotifyHide {
+	bottom: -4.25em;
 }
 .NotifyShow {
 	bottom: 0;
