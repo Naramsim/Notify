@@ -22,3 +22,14 @@
 .button-secondary {
     background: rgb(66, 184, 221); /* this is a light blue */
 }
+
+@media only screen and (max-device-width: 780px){
+	.button-container {
+		display: block;
+		padding: 12px 0;
+	}
+
+	.pure-g {
+		display: block;
+	}
+}
