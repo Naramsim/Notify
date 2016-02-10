@@ -13,6 +13,7 @@ function Toast () {
 	var timer = 2000;
 	var colorHint = "#31c0f3";
 	var toastHeight = "4.5em";
+	var isLarge = false;
 	var isOn = false;
 	var queue = [];
 	var comingFromQueue = false;
@@ -75,6 +76,13 @@ function Toast () {
 		if(toastHeight === "7.5em"){toast.classList.add("doubleLine");}
 		else{toast.classList.remove("doubleLine");}
 	}
+	function changeLayout() {
+		if(isLarge === true){
+			toast.classList.add("large");
+		}else{
+			toast.classList.remove("large");
+		}
+	}
 	function prepareToast (description, hint, img, container) {
 		var DomElement = "";
 		if(container){
@@ -101,6 +109,7 @@ function Toast () {
 			createDomElem(DomElement);
 		}
 		changeHeight();
+		changeLayout();
 	}
 
 
@@ -183,6 +192,18 @@ function Toast () {
 		if(type === "doubleLine") { toastHeight = "7.5em";}
 		else {toastHeight = "4.5em";}
 	};
+
+	this.setLayout = function (mode) {
+		if(mode === "large"){isLarge = true;}
+		else{isLarge = false;}
+	}
+
+	this.reset = function () {
+		isLarge = "normal";
+		type = "4.5em";
+		colorHint = "#31c0f3";
+		timer = 2000;
+	}
 
 	this.getToast = function() {
 		return toast;

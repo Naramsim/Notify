@@ -21,7 +21,6 @@ body {
 .NotifyHide {
 	bottom: -4.25em;
 }
-
 .NotifyToast .NotifyHide {
 	bottom: -4.25em;
 }
@@ -57,6 +56,12 @@ body {
 	width: 100%; 
 	text-align: center;
 	color: rgb(244, 244, 244);
+}
+.NotifyToast.large {
+	width: 100%;
+    left: 0;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
 }
 .close {
 	display: none;
