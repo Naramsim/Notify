@@ -28,11 +28,11 @@ Include `notify.js` and `notify.css` in the document from RawGit CDN.
 
 Quick usage: call `startToast()` _wherever_, _whenever_, _however_ you want.
 ```
-startToast(seconds to stay on, description, hint, URL of image, callback, callback parameters );
-startToast(int , str, str, str, function -> without parenthesis!, array );
+Notify.startToast(seconds to stay on, description, hint, URL of image, callback, callback parameters );
+Notify.startToast(int , str, str, str, function -> without parenthesis!, array );
 
 Example:
-startToast(2000, "First Toast", "HI");
+Notify.startToast(2000, "First Toast", "HI");
 ```
 
 
@@ -49,7 +49,7 @@ setTimeout(function(){
 
 #### Font Awesome support!
 ``` javascript
-startToast(1000, "FontAwesome" ,"AWESOME" ,"fa fa-github") //just insert the classes needed and you are good to go
+Notify.startToast(1000, "FontAwesome" ,"AWESOME" ,"fa fa-github") //just insert the classes needed and you are good to go
 ```
 
 Build

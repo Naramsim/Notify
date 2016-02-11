@@ -210,12 +210,20 @@ function Toast () {
 	};
 }
 
-function startToast(timer, description, hint, img, callback, callbackParameters) { //not setup required for this call
-	"use strict";
-	var currentToast = new Toast();
-	currentToast.stayOnFor(timer);
-	currentToast.start(description, hint, img, callback, callbackParameters);
+function LazyNotify(){
+	this.startToast = function(timer, description, hint, img, callback, callbackParameters) { //not setup required for this call
+		"use strict";
+		var currentToast = new Toast();
+		currentToast.stayOnFor(timer);
+		currentToast.start(description, hint, img, callback, callbackParameters);
+		setTimeout(function(){
+			currentToast.getToast().remove();
+		},timer + 1000);
+	}
 }
+Notify = new LazyNotify();
+
+
 
 
 
